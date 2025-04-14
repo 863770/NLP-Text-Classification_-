@@ -1,40 +1,41 @@
-#Code for Part 1
-# Step 1: Import Libraries
-import pandas as pd
-import re
-from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer, ENGLISH_STOP_WORDS
+# NLP Text Classification
 
-# Step 2: Load the dataset
-df = pd.read_csv("/content/sample_data/IMDB Dataset.csv")
+This project demonstrates a basic Natural Language Processing (NLP) pipeline for **Text Classification** using Machine Learning models. The goal is to classify textual data into predefined categories based on content.
 
-# Step 3: Explore the dataset
-print("Dataset Info:\n", df.info())
-print("\nMissing Values:\n", df.isnull().sum())
-print("\nLabel Distribution:\n", df['sentiment'].value_counts())
+## 📁 Project Title
+**Text Classification using NLP Techniques**
 
-# Step 4: Text Preprocessing Function
-def preprocess_text(text):
-    text = text.lower()  # Lowercase
-    text = re.sub(r'[^a-z\s]', '', text)  # Remove punctuation and numbers
-    tokens = text.split()  # Tokenize (split by space)
-    tokens = [word for word in tokens if word not in ENGLISH_STOP_WORDS]  # Remove stopwords
-    return ' '.join(tokens)
+## 👩‍💻 Author
+**Sapna Dahikamble**
 
-# Step 5: Apply preprocessing (use a sample if full dataset is too large)
-df_sample = df.head(1000).copy()
-df_sample['cleaned_review'] = df_sample['review'].apply(preprocess_text)
+## 📌 Description
 
-# Step 6: Vectorization - CountVectorizer
-count_vectorizer = CountVectorizer(max_features=1000)
-X_count = count_vectorizer.fit_transform(df_sample['cleaned_review'])
+In this notebook, we apply NLP techniques such as:
+- Text pre-processing (tokenization, stopwords removal, etc.)
+- Feature extraction using **TF-IDF**
+- Training classifiers such as:
+  - Logistic Regression
+  - Multinomial Naive Bayes
+  - Support Vector Machine (SVM)
+- Evaluation using accuracy, precision, recall, and F1-score
 
-# Step 7: Vectorization - TF-IDF
-tfidf_vectorizer = TfidfVectorizer(max_features=1000)
-X_tfidf = tfidf_vectorizer.fit_transform(df_sample['cleaned_review'])
+The dataset used is a simple text-based dataset categorized into classes (you can mention source if any).
 
-# Step 8: Output Vector Shapes and Sample Features
-print("\nCountVectorizer Shape:", X_count.shape)
-print("CountVectorizer Features (first 10):", count_vectorizer.get_feature_names_out()[:10])
+---
 
-print("\nTF-IDF Shape:", X_tfidf.shape)
-print("TF-IDF Features (first 10):", tfidf_vectorizer.get_feature_names_out()[:10])
+## 📦 Installation
+
+1. Clone this repository:
+```bash
+git clone https://github.com/your-username/NLP-Text-Classification.git
+2.cd NLP-Text-Classification
+3.Create a virtual environment (optional but recommended):
+python -m venv venv
+source venv/bin/activate  # for Windows use `venv\Scripts\activate`
+4.Create a virtual environment (optional but recommended):
+python -m venv venv
+source venv/bin/activate  # for Windows use `venv\Scripts\activate`
+
+
+
+
